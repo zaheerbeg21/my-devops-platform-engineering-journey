@@ -1,5 +1,5 @@
 # DevOps Platform Engineering Journey (6 Months)
-
+#Source - https://chatgpt.com/c/69ede185-4d8c-83e8-aacf-35e9fc0af847
 ## Stack
 - Odoo 16
 - FastAPI
