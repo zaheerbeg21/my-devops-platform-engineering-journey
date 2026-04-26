@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps 6-Month Master Syllabus</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0a0c0f;
+  --bg2: #111418;
+  --bg3: #161b22;
+  --bg4: #1e252f;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8edf2;
+  --muted: #8b95a1;
+  --faint: #4a5260;
+  --accent: #00d4aa;
+  --accent2: #0099ff;
+  --accent3: #ff6b35;
+  --accent4: #a78bfa;
+  --accent5: #fbbf24;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warn: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --head: 'Syne', sans-serif;
+  --body: 'Instrument Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0a0c0f 0%, #0d1520 50%, #0a0c0f 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(0,153,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,212,170,0.1);
+  border: 1px solid rgba(0,212,170,0.25);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+  letter-spacing: 0.05em;
+}
+.hero-tag::before { content: '▶'; font-size: 8px; }
+.hero h1 {
+  font-family: var(--head);
+  font-size: 38px; font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 620px;
+  margin-bottom: 28px;
+}
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 24px;
+}
+.hero-stat {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.hero-stat .val {
+  font-family: var(--head); font-size: 22px; font-weight: 700;
+}
+.hero-stat .lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.c-accent { color: var(--accent); }
+.c-blue { color: var(--accent2); }
+.c-orange { color: var(--accent3); }
+.c-purple { color: var(--accent4); }
+.c-yellow { color: var(--accent5); }
+
+/* HONEST MENTOR BOX */
+.mentor-warn {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-left: 3px solid var(--danger);
+  padding: 18px 22px;
+  margin: 0 40px 0;
+  border-radius: 0 8px 8px 0;
+}
+.mentor-warn h3 { font-family: var(--head); font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 8px; letter-spacing: 0.05em; text-transform: uppercase; }
+.mentor-warn p { font-size: 13px; color: #fca5a5; line-height: 1.7; }
+.mentor-warn p + p { margin-top: 8px; }
+.mentor-warn strong { color: #fef2f2; }
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 200px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; flex-shrink: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.sidebar-section-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  color: var(--faint); letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0 18px 8px;
+  margin-top: 16px;
+}
+.sidebar-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 18px;
+  cursor: pointer;
+  font-size: 12px; font-weight: 500;
+  color: var(--muted);
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,212,170,0.05); }
+.sidebar-item .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-m1 { background: var(--accent); }
+.dot-m2 { background: var(--accent2); }
+.dot-m3 { background: var(--accent3); }
+.dot-m4 { background: var(--accent4); }
+.dot-m5 { background: var(--accent5); }
+.dot-m6 { background: var(--danger); }
+.dot-proj { background: var(--success); }
+.dot-int { background: #e879f9; }
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 32px 40px;
+  overflow-y: auto;
+  max-width: 900px;
+}
+
+/* SECTION */
+.section { display: none; }
+.section.active { display: block; }
+
+/* PHASE HEADER */
+.phase-header {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin-bottom: 28px;
+}
+.phase-num {
+  font-family: var(--head); font-size: 48px; font-weight: 800;
+  color: var(--border2); line-height: 1;
+  flex-shrink: 0; min-width: 56px;
+}
+.phase-meta { flex: 1; }
+.phase-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  padding: 3px 8px; border-radius: 3px;
+  margin-bottom: 6px; letter-spacing: 0.05em;
+}
+.phase-title {
+  font-family: var(--head); font-size: 26px; font-weight: 700;
+  line-height: 1.2; margin-bottom: 6px;
+}
+.phase-desc { font-size: 13px; color: var(--muted); max-width: 580px; }
+.phase-pills {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+.pill {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--muted); padding: 3px 8px; border-radius: 4px;
+}
+
+/* MODULE CARD */
+.module-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.module-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+.module-header:hover { background: rgba(255,255,255,0.02); }
+.module-header.open { border-bottom-color: var(--border); }
+.module-num {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--faint); width: 32px; flex-shrink: 0;
+}
+.module-title {
+  font-family: var(--head); font-size: 14px; font-weight: 600;
+  flex: 1;
+}
+.module-badges { display: flex; gap: 6px; }
+.badge {
+  font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px;
+  font-family: var(--mono); letter-spacing: 0.03em;
+}
+.b-week { background: rgba(0,212,170,0.1); color: var(--accent); border: 1px solid rgba(0,212,170,0.2); }
+.b-hard { background: rgba(239,68,68,0.1); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
+.b-med { background: rgba(245,158,11,0.1); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+.b-easy { background: rgba(34,197,94,0.1); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
+.b-crit { background: rgba(167,139,250,0.1); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.2); }
+.chevron { color: var(--faint); font-size: 11px; transition: transform 0.2s; }
+.chevron.open { transform: rotate(90deg); }
+
+.module-body {
+  display: none; padding: 18px;
+}
+.module-body.open { display: block; }
+
+/* TOPIC GRID */
+.topic-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 18px;
+}
+.topic-block {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px;
+}
+.topic-block h4 {
+  font-family: var(--head); font-size: 12px; font-weight: 600;
+  color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.topic-block ul { list-style: none; }
+.topic-block ul li {
+  font-size: 12px; color: var(--muted); padding: 3px 0;
+  padding-left: 12px; position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.topic-block ul li:last-child { border-bottom: none; }
+.topic-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
+
+/* USE CASE */
+.use-case {
+  background: rgba(0,153,255,0.04);
+  border: 1px solid rgba(0,153,255,0.15);
+  border-radius: 8px; padding: 14px; margin-bottom: 14px;
+}
+.use-case-tag {
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.use-case h4 { font-family: var(--head); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.use-case p { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+/* CODE BLOCK */
+.code-block {
+  background: #0d1117;
+  border: 1px solid var(--border2);
+  border-radius: 6px; padding: 14px;
+  font-family: var(--mono); font-size: 11px;
+  color: #b3c4d8; line-height: 1.7;
+  overflow-x: auto; margin: 10px 0;
+}
+.code-block .k { color: #ff7b72; }
+.code-block .s { color: #a5d6ff; }
+.code-block .c { color: #8b949e; font-style: italic; }
+.code-block .v { color: #79c0ff; }
+.code-block .f { color: #d2a8ff; }
+
+/* INTERVIEW Q */
+.interview-q {
+  background: rgba(167,139,250,0.04);
+  border: 1px solid rgba(167,139,250,0.15);
+  border-radius: 8px; padding: 14px; margin-bottom: 10px;
+}
+.iq-label { font-family: var(--mono); font-size: 9px; font-weight: 700; color: var(--accent4); letter-spacing: 0.1em; margin-bottom: 5px; }
+.iq-q { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.iq-a { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.iq-a strong { color: var(--text); }
+
+/* PROJECT CARD */
+.project-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.proj-p1::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.proj-p2::before { background: linear-gradient(90deg, var(--accent2), var(--accent4)); }
+.proj-p3::before { background: linear-gradient(90deg, var(--accent4), var(--accent3)); }
+.proj-p4::before { background: linear-gradient(90deg, var(--accent3), var(--accent5)); }
+.proj-p5::before { background: linear-gradient(90deg, var(--accent5), var(--danger)); }
+
+.proj-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.proj-title-group {}
+.proj-num { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-bottom: 4px; }
+.proj-title { font-family: var(--head); font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.proj-sub { font-size: 12px; color: var(--muted); }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; flex-shrink: 0; margin-top: 4px; }
+.proj-tag {
+  font-family: var(--mono); font-size: 10px;
+  background: var(--bg4); border: 1px solid var(--border2);
+  color: var(--muted); padding: 2px 7px; border-radius: 3px;
+}
+.proj-section { margin-top: 14px; }
+.proj-section h5 {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--faint); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.proj-section ul { list-style: none; }
+.proj-section ul li {
+  font-size: 12px; color: var(--muted); padding: 4px 0 4px 14px;
+  position: relative; border-bottom: 1px solid var(--border);
+}
+.proj-section ul li:last-child { border-bottom: none; }
+.proj-section ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 5px; }
+
+/* ROADMAP */
+.roadmap-track {
+  display: flex; gap: 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+}
+.roadmap-seg {
+  flex: 1; padding: 10px 8px; text-align: center;
+  border-right: 1px solid var(--border);
+  cursor: pointer; transition: background 0.15s;
+}
+.roadmap-seg:last-child { border-right: none; }
+.roadmap-seg .rs-num { font-family: var(--head); font-size: 13px; font-weight: 700; }
+.roadmap-seg .rs-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.roadmap-seg.rs-m1 .rs-num { color: var(--accent); }
+.roadmap-seg.rs-m2 .rs-num { color: var(--accent2); }
+.roadmap-seg.rs-m3 .rs-num { color: var(--accent3); }
+.roadmap-seg.rs-m4 .rs-num { color: var(--accent4); }
+.roadmap-seg.rs-m5 .rs-num { color: var(--accent5); }
+.roadmap-seg.rs-m6 .rs-num { color: var(--danger); }
+.roadmap-seg:hover { background: rgba(255,255,255,0.03); }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+.data-table th {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--faint); letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 9px 12px; font-size: 12px; color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 500; color: var(--text); }
+
+/* MENTOR CALLOUT */
+.mentor-callout {
+  border-left: 3px solid var(--accent3);
+  background: rgba(255,107,53,0.05);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 16px; margin: 16px 0;
+}
+.mentor-callout .mc-label { font-family: var(--mono); font-size: 9px; font-weight: 700; color: var(--accent3); letter-spacing: 0.1em; margin-bottom: 6px; }
+.mentor-callout p { font-size: 12px; color: #fbd0b0; line-height: 1.7; }
+
+/* DIVIDER */
+.section-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* PROGRESS */
+.progress-bar-wrap { background: var(--bg3); border-radius: 4px; height: 4px; margin-top: 10px; }
+.progress-bar { height: 4px; border-radius: 4px; }
+
+/* SKILLS MATRIX */
+.skills-matrix { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 14px 0; }
+.skill-item { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.skill-item .si-name { font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+.skill-item .si-level { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+.si-bar { background: var(--bg4); height: 3px; border-radius: 2px; }
+.si-fill { height: 3px; border-radius: 2px; }
+
+/* SALARY BOX */
+.salary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 14px 0; }
+.salary-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.salary-card .sc-region { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.salary-card .sc-val { font-family: var(--head); font-size: 18px; font-weight: 700; }
+.salary-card .sc-note { font-size: 11px; color: var(--faint); margin-top: 4px; }
+
+/* SCROLLBAR CONTENT */
+.content::-webkit-scrollbar { width: 4px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* COLLAPSIBLE */
+details { margin-bottom: 8px; }
+details summary { cursor: pointer; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+
+/* STICKY HEADER IN CONTENT */
+.content-topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  padding: 10px 40px;
+  display: flex; align-items: center; gap: 12px;
+}
+.ctb-section { font-family: var(--head); font-size: 13px; font-weight: 600; color: var(--text); }
+.ctb-muted { font-size: 12px; color: var(--faint); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero { padding: 32px 20px 28px; }
+  .hero h1 { font-size: 26px; }
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; }
+  .content { padding: 20px; }
+  .topic-grid { grid-template-columns: 1fr; }
+  .skills-matrix { grid-template-columns: 1fr 1fr; }
+  .salary-grid { grid-template-columns: 1fr 1fr; }
+  .mentor-warn { margin: 0 20px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">DevOps Engineering — Complete 6-Month Curriculum</div>
+  <h1>Master <span>DevOps</span> From Zero<br>to Production-Ready</h1>
+  <p>Built around your Odoo 16, Next.js, and FastAPI stack. Enterprise-grade, interview-tested, and brutally honest about what it takes.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="val c-accent">6</span><span class="lbl">Months</span></div>
+    <div class="hero-stat"><span class="val c-blue">24</span><span class="lbl">Modules</span></div>
+    <div class="hero-stat"><span class="val c-orange">8</span><span class="lbl">Real Projects</span></div>
+    <div class="hero-stat"><span class="val c-purple">150+</span><span class="lbl">Interview Q&A</span></div>
+    <div class="hero-stat"><span class="val c-yellow">3</span><span class="lbl">Certs Targeted</span></div>
+  </div>
+</div>
+
+<div class="mentor-warn" style="margin-top:0;margin-bottom:0;border-radius:0;border-left:none;border-right:none;border-top:none;">
+  <h3>⚠ Honest Mentor Note — Read Before You Start</h3>
+  <p><strong>The blueprint from your career plan says "Don't become a pure DevOps engineer." That advice is correct IF your goal is Solution Architect.</strong> However, DevOps as a competency — not a job title — is exactly what separates architects from developers. Knowing Docker, Kubernetes, CI/CD, and IaC is table stakes for any Solution Architect role in 2026.</p>
+  <p>So here is the real play: <strong>Learn DevOps at depth, but position it as "Platform Architecture" on your CV.</strong> "DevOps Engineer" pays SAR 58K–120K/yr in Saudi. "Platform Architect / Cloud DevOps Architect" with the same skills pays SAR 300K–500K. Same skills, different framing. This syllabus teaches DevOps. Your job is to frame it as architecture work. Every project below is built with that framing in mind.</p>
+</div>
+
+<!-- STICKY TOP BAR -->
+<div class="content-topbar">
+  <span class="ctb-section" id="ctb-title">Overview</span>
+  <span class="ctb-muted">— 6-Month DevOps Syllabus</span>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-section-label">Navigation</div>
+  <div class="sidebar-item active" onclick="show('overview')" data-label="Overview">
+    <span class="dot" style="background:var(--accent)"></span>Overview & Roadmap
+  </div>
+  <div class="sidebar-section-label">Phase 1 — Foundation</div>
+  <div class="sidebar-item" onclick="show('m1')" data-label="Month 1 · Linux & Git">
+    <span class="dot dot-m1"></span>Month 1 · Linux & Git
+  </div>
+  <div class="sidebar-item" onclick="show('m2')" data-label="Month 2 · Containers">
+    <span class="dot dot-m2"></span>Month 2 · Docker & Containers
+  </div>
+  <div class="sidebar-section-label">Phase 2 — CI/CD & Cloud</div>
+  <div class="sidebar-item" onclick="show('m3')" data-label="Month 3 · CI/CD">
+    <span class="dot dot-m3"></span>Month 3 · CI/CD Pipelines
+  </div>
+  <div class="sidebar-item" onclick="show('m4')" data-label="Month 4 · Cloud & IaC">
+    <span class="dot dot-m4"></span>Month 4 · Cloud & IaC
+  </div>
+  <div class="sidebar-section-label">Phase 3 — Advanced</div>
+  <div class="sidebar-item" onclick="show('m5')" data-label="Month 5 · Kubernetes">
+    <span class="dot dot-m5"></span>Month 5 · Kubernetes & Orchestration
+  </div>
+  <div class="sidebar-item" onclick="show('m6')" data-label="Month 6 · Observability">
+    <span class="dot dot-m6"></span>Month 6 · Observability & DevSecOps
+  </div>
+  <div class="sidebar-section-label">Capstone Projects</div>
+  <div class="sidebar-item" onclick="show('projects')" data-label="Projects">
+    <span class="dot dot-proj"></span>8 Portfolio Projects
+  </div>
+  <div class="sidebar-section-label">Career</div>
+  <div class="sidebar-item" onclick="show('interview')" data-label="Interview Prep">
+    <span class="dot dot-int"></span>Interview Prep (150+ Q)
+  </div>
+  <div class="sidebar-item" onclick="show('career')" data-label="Career Strategy">
+    <span class="dot" style="background:var(--danger)"></span>Career Transition Strategy
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main class="content" id="content">
+
+<!-- ============================== OVERVIEW ============================== -->
+<div class="section active" id="section-overview">
+  <div class="phase-header">
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(0,212,170,0.1);color:var(--accent);border:1px solid rgba(0,212,170,0.2);">CURRICULUM OVERVIEW</div>
+      <div class="phase-title">Your 6-Month DevOps Roadmap</div>
+      <div class="phase-desc">End-to-end learning path using your existing Odoo 16, Next.js, and FastAPI stack as the target applications for every DevOps concept you learn.</div>
+    </div>
+  </div>
+
+  <div class="roadmap-track">
+    <div class="roadmap-seg rs-m1"><div class="rs-num">M1</div><div class="rs-lbl">Linux & Git</div></div>
+    <div class="roadmap-seg rs-m2"><div class="rs-num">M2</div><div class="rs-lbl">Docker</div></div>
+    <div class="roadmap-seg rs-m3"><div class="rs-num">M3</div><div class="rs-lbl">CI/CD</div></div>
+    <div class="roadmap-seg rs-m4"><div class="rs-num">M4</div><div class="rs-lbl">Cloud/IaC</div></div>
+    <div class="roadmap-seg rs-m5"><div class="rs-num">M5</div><div class="rs-lbl">Kubernetes</div></div>
+    <div class="roadmap-seg rs-m6"><div class="rs-num">M6</div><div class="rs-lbl">Observability</div></div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header open" onclick="toggleModule(this)">
+      <span class="module-num">01</span>
+      <span class="module-title">Stack You'll Build On</span>
+      <span class="chevron open">▶</span>
+    </div>
+    <div class="module-body open">
+      <table class="data-table">
+        <thead><tr><th>App</th><th>Stack</th><th>Port</th><th>DevOps Use</th></tr></thead>
+        <tbody>
+          <tr><td>Odoo 16</td><td>Python, PostgreSQL</td><td>8069</td><td>Enterprise ERP containerization, zero-downtime deployment, DB backup automation</td></tr>
+          <tr><td>Next.js Frontend</td><td>Node.js, React</td><td>3000</td><td>Static build pipeline, CDN deployment, SSR caching strategy</td></tr>
+          <tr><td>FastAPI Backend</td><td>Python, Uvicorn</td><td>8000</td><td>API containerization, health checks, load balancing, autoscaling</td></tr>
+          <tr><td>Shared DB</td><td>PostgreSQL 15</td><td>5432</td><td>Managed DB patterns, connection pooling (PgBouncer), backup/restore, HA setup</td></tr>
+          <tr><td>Redis</td><td>Cache/Queue</td><td>6379</td><td>Session management, Odoo cache, rate limiting for FastAPI</td></tr>
+          <tr><td>Nginx</td><td>Reverse Proxy</td><td>80/443</td><td>Load balancing, SSL termination, upstream routing</td></tr>
+        </tbody>
+      </table>
+      <div class="mentor-callout">
+        <div class="mc-label">Mentor Note</div>
+        <p>Every single thing you learn in this curriculum must be applied to this stack. Not a "hello world" container — a real Odoo 16 container with proper volumes, secrets, and health checks. Interviewers in 2026 don't just ask theory. They ask "walk me through a real pipeline you built." Your answer will be this stack.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">02</span>
+      <span class="module-title">Portfolio-Level Databases to Include</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <table class="data-table">
+        <thead><tr><th>Database</th><th>Type</th><th>Use Case in Your Projects</th><th>Why Interviewers Care</th></tr></thead>
+        <tbody>
+          <tr><td>PostgreSQL 15</td><td>Relational OLTP</td><td>Primary DB for Odoo, FastAPI, shared schema</td><td>Every enterprise shop runs Postgres. Show you can do HA, replication, PgBouncer</td></tr>
+          <tr><td>Redis 7</td><td>In-memory K/V</td><td>Odoo sessions, FastAPI rate limit, job queue</td><td>Caching is asked in every DevOps interview. Show TTL, eviction, sentinel HA</td></tr>
+          <tr><td>MongoDB</td><td>Document NoSQL</td><td>Event logs, audit trail, unstructured data</td><td>Shows polyglot persistence understanding — critical for microservices questions</td></tr>
+          <tr><td>Elasticsearch</td><td>Search / Analytics</td><td>Log aggregation in ELK stack, product search</td><td>Part of the observability stack (ELK). Mandatory for senior DevOps roles</td></tr>
+          <tr><td>ClickHouse</td><td>Columnar OLAP</td><td>Analytics, reporting dashboard</td><td>Modern data-intensive architectures. Shows you know beyond OLTP</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">03</span>
+      <span class="module-title">Weekly Time Commitment & Prerequisites</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <table class="data-table">
+        <thead><tr><th>Item</th><th>Requirement</th></tr></thead>
+        <tbody>
+          <tr><td>Mon – Sat (daily)</td><td>1 hour/day focused study — theory, reading, or hands-on practice. No exceptions. Consistency beats intensity.</td></tr>
+          <tr><td>Sunday (lab day)</td><td>3 hours every Sunday — dedicated project/hands-on lab work. This is your build day. Use it to apply the week's concepts to your actual stack.</td></tr>
+          <tr><td>Total per week</td><td>9 hours/week (6 × 1hr + 1 × 3hr). Over 6 months = ~216 hours of focused learning. This is sufficient if you stay consistent every single week.</td></tr>
+          <tr><td>Sunday breakdown</td><td>Hour 1: Review the week's notes + fix what you didn't understand. Hour 2: Build/extend the current project. Hour 3: Write a short README or LinkedIn post about what you built.</td></tr>
+          <tr><td>Hardware</td><td>8GB RAM minimum (16GB recommended). You will run Odoo + containers simultaneously.</td></tr>
+          <tr><td>Cloud account</td><td>Azure free tier ($200 credit) + AWS free tier. Set up both in Week 1.</td></tr>
+          <tr><td>GitHub account</td><td>All projects must be public repos with proper READMEs. This is your portfolio.</td></tr>
+          <tr><td>Linux machine</td><td>Ubuntu 22.04 LTS preferred. WSL2 acceptable for Month 1 only. Real Linux after that.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 1 ============================== -->
+<div class="section" id="section-m1">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(0,212,170,0.2)">01</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(0,212,170,0.1);color:var(--accent);border:1px solid rgba(0,212,170,0.2);">MONTH 1 · WEEKS 1–4</div>
+      <div class="phase-title">Linux, Bash & Git Mastery</div>
+      <div class="phase-desc">The unglamorous foundation that every senior DevOps engineer lives in daily. Most beginners rush past this. That's why they fail production incidents.</div>
+      <div class="phase-pills">
+        <span class="pill">Linux CLI</span><span class="pill">Bash Scripting</span><span class="pill">Git Advanced</span>
+        <span class="pill">SSH/Networking</span><span class="pill">Process Management</span><span class="pill">Cron Jobs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 1 -->
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W1</span>
+      <span class="module-title">Linux Fundamentals — The DevOps Foundation</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 1</span><span class="badge b-easy">BEGINNER</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>Filesystem hierarchy (/etc, /var, /opt, /proc)</li>
+            <li>File permissions (chmod, chown, ACLs)</li>
+            <li>Process management (ps, top, htop, kill, nice)</li>
+            <li>Package management (apt, yum, snap)</li>
+            <li>User management (useradd, sudoers, groups)</li>
+            <li>Environment variables, PATH, .bashrc</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Create dedicated odoo user with correct permissions</li>
+            <li>Set up /opt/odoo with proper ownership</li>
+            <li>Manage PostgreSQL service (systemctl)</li>
+            <li>Read /var/log/odoo logs, /var/log/postgresql</li>
+            <li>Set environment vars for Odoo config</li>
+            <li>Configure UFW firewall (ports 8069, 5432, 3000, 8000)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Real-World Use Case</div>
+        <h4>Odoo Production Server Setup from Scratch</h4>
+        <p>Provision a fresh Ubuntu 22.04 VPS. Install PostgreSQL 15, create the odoo database user with restricted permissions, install Odoo 16 dependencies, set up the odoo system user, configure logrotate for Odoo logs, and set up systemd service with automatic restart on failure. This is the exact setup you'd do on a client server.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">A process on your server is consuming 100% CPU. Walk me through how you diagnose and resolve it.</div>
+        <div class="iq-a"><strong>Answer framework:</strong> 1) Use <code>top</code> or <code>htop</code> to identify the PID. 2) Use <code>ps aux --sort=-%cpu | head -10</code> to see top consumers. 3) Use <code>strace -p [PID]</code> to see syscalls in real time. 4) Check <code>/proc/[PID]/</code> for memory maps, open files. 5) If it's Odoo — check for runaway ORM query via <code>pg_stat_activity</code>. 6) Decision: kill, renice, or restart service. 7) Root cause via application logs. Always log the incident.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W2</span>
+      <span class="module-title">Bash Scripting for Automation</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 2</span><span class="badge b-med">INTERMEDIATE</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>Variables, arrays, conditionals, loops</li>
+            <li>Functions, error handling, exit codes</li>
+            <li>Regex and text processing (grep, sed, awk)</li>
+            <li>File I/O, redirection, pipes</li>
+            <li>Cron jobs and scheduling</li>
+            <li>Script security (set -euo pipefail)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Automated Odoo backup script (pg_dump + S3 upload)</li>
+            <li>Next.js build + deploy script with rollback</li>
+            <li>Health check script for all 4 services</li>
+            <li>Log rotation and cleanup automation</li>
+            <li>FastAPI startup script with env validation</li>
+            <li>Cron-based certificate renewal checks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case — Must Build This</div>
+        <h4>Odoo Database Backup Automation</h4>
+        <p>Write a production-grade Bash script that: dumps PostgreSQL Odoo database with timestamp, compresses using gzip, uploads to Azure Blob Storage using az-cli, retains last 30 daily backups and 12 monthly, sends Slack notification on success/failure, and logs all operations to /var/log/odoo-backup.log. This is a real deliverable you can show clients and interviewers.</p>
+      </div>
+      <div class="code-block">
+<span class="c">#!/bin/bash</span>
+<span class="k">set</span> -euo pipefail
+
+<span class="v">BACKUP_DIR</span>=<span class="s">"/opt/backups/odoo"</span>
+<span class="v">DATE</span>=$(<span class="f">date</span> +%Y%m%d_%H%M%S)
+<span class="v">DB_NAME</span>=<span class="s">"odoo_production"</span>
+<span class="v">AZURE_CONTAINER</span>=<span class="s">"odoo-backups"</span>
+
+<span class="f">pg_dump</span> -U odoo -h localhost \
+  -F c <span class="v">$DB_NAME</span> | <span class="f">gzip</span> > \
+  <span class="v">$BACKUP_DIR</span>/backup_<span class="v">$DATE</span>.dump.gz
+
+<span class="f">az storage blob upload</span> \
+  --container-name <span class="v">$AZURE_CONTAINER</span> \
+  --file <span class="v">$BACKUP_DIR</span>/backup_<span class="v">$DATE</span>.dump.gz \
+  --name backup_<span class="v">$DATE</span>.dump.gz
+
+<span class="c"># Retain last 30 backups only</span>
+<span class="f">find</span> <span class="v">$BACKUP_DIR</span> -name "*.gz" \
+  -mtime +30 -delete
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">How do you ensure a bash script is production-safe and won't silently fail?</div>
+        <div class="iq-a"><strong>Answer:</strong> Always start with <code>set -euo pipefail</code>. -e exits on error, -u treats unset variables as errors, -o pipefail fails if any command in a pipe fails. Add proper logging with timestamps. Use trap for cleanup on EXIT, INT, TERM signals. Validate all inputs and environment variables at the start. Never assume files exist — check first. Add idempotency so the script can be safely re-run. Test failure scenarios, not just happy paths.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W3</span>
+      <span class="module-title">Git — Beyond Basic Commits</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 3</span><span class="badge b-med">INTERMEDIATE</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>Branching strategies (Git Flow, Trunk-based)</li>
+            <li>Rebase vs merge — when to use each</li>
+            <li>Cherry-pick, bisect, reflog</li>
+            <li>Git hooks (pre-commit, pre-push)</li>
+            <li>Monorepo vs polyrepo architecture</li>
+            <li>Git submodules and worktrees</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Set up Trunk-based dev for FastAPI service</li>
+            <li>Pre-commit hooks: linting, security scan for Odoo custom modules</li>
+            <li>Git Flow for Next.js (feature → develop → main)</li>
+            <li>Monorepo setup: odoo-addons + next-frontend + fastapi-service</li>
+            <li>Tag-based releases with semantic versioning</li>
+            <li>Protected branches, required reviews</li>
+          </ul>
+        </div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Explain Trunk-based development vs Git Flow. When would you recommend each?</div>
+        <div class="iq-a"><strong>Trunk-based:</strong> All developers commit to a single main branch, using short-lived feature branches (max 1–2 days). Requires feature flags for incomplete work. Enables true CI/CD. Best for: teams deploying multiple times per day, mature CI pipelines, experienced teams. <strong>Git Flow:</strong> Long-lived develop, feature, release, hotfix branches. More structured. Best for: scheduled release cycles, teams with QA gates, less mature CI setups. <strong>Your recommendation for GCC enterprise clients:</strong> Git Flow for ERP (Odoo has long release cycles), Trunk-based for FastAPI microservices (frequent deployments).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 4 -->
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W4</span>
+      <span class="module-title">Networking & SSH for DevOps</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 4</span><span class="badge b-med">INTERMEDIATE</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>TCP/IP, DNS, HTTP/HTTPS basics</li>
+            <li>SSH key management, port forwarding</li>
+            <li>Firewall rules (iptables, UFW, nftables)</li>
+            <li>Nginx as reverse proxy + load balancer</li>
+            <li>SSL/TLS with Let's Encrypt (Certbot)</li>
+            <li>Network debugging (netstat, ss, nc, curl, dig)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Configure Nginx to route: / → Next.js:3000, /api → FastAPI:8000, /odoo → Odoo:8069</li>
+            <li>SSL termination at Nginx for all 3 apps</li>
+            <li>SSH tunneling to access PostgreSQL remotely</li>
+            <li>Rate limiting at Nginx level for FastAPI</li>
+            <li>WebSocket support for Odoo real-time features</li>
+            <li>Configure CORS at Nginx, not in application code</li>
+          </ul>
+        </div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Your Odoo application is responding slowly. Users report 30-second load times. How do you diagnose this systematically?</div>
+        <div class="iq-a"><strong>Layered diagnosis:</strong> 1) DNS resolution — <code>dig odoo.company.com</code>. 2) Network latency — <code>ping + traceroute</code>. 3) Nginx — check access.log for response times, upstream_response_time. 4) Odoo app — check /var/log/odoo/odoo-server.log for slow methods. 5) PostgreSQL — run <code>SELECT query, mean_exec_time FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10</code>. 6) System resources — <code>vmstat, iostat, free -h</code>. 7) Concurrent connections — check pg_stat_activity, Odoo worker count. Most likely culprits: missing DB index, Odoo worker count too low, PostgreSQL query without index.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 2 ============================== -->
+<div class="section" id="section-m2">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(0,153,255,0.2)">02</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(0,153,255,0.1);color:var(--accent2);border:1px solid rgba(0,153,255,0.2);">MONTH 2 · WEEKS 5–8</div>
+      <div class="phase-title">Docker & Container Architecture</div>
+      <div class="phase-desc">The skill that pays immediate dividends. By end of this month you will containerize all 4 applications and run them as a production-grade stack with Docker Compose.</div>
+      <div class="phase-pills">
+        <span class="pill">Dockerfile</span><span class="pill">Docker Compose</span><span class="pill">Multi-stage builds</span>
+        <span class="pill">Networks & Volumes</span><span class="pill">Registry & Security</span><span class="pill">Compose profiles</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W5</span>
+      <span class="module-title">Docker Fundamentals & Dockerfile Mastery</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 5</span><span class="badge b-crit">CRITICAL</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>Image vs Container vs Layer</li>
+            <li>Dockerfile: FROM, RUN, COPY, WORKDIR, ENV, EXPOSE, CMD, ENTRYPOINT</li>
+            <li>Multi-stage builds for production images</li>
+            <li>Layer caching optimization</li>
+            <li>Image size reduction strategies</li>
+            <li>.dockerignore best practices</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Production Dockerfile for Odoo 16 (custom addons included)</li>
+            <li>Multi-stage Dockerfile for Next.js (build stage → runtime stage)</li>
+            <li>FastAPI Dockerfile with non-root user</li>
+            <li>Optimized Python image (slim vs alpine tradeoffs)</li>
+            <li>Build argument secrets (never in ENV layer)</li>
+            <li>Health checks in every Dockerfile</li>
+          </ul>
+        </div>
+      </div>
+      <div class="code-block">
+<span class="c"># Production Odoo 16 Dockerfile</span>
+<span class="k">FROM</span> odoo:<span class="v">16.0</span> <span class="k">AS</span> base
+
+<span class="k">USER</span> root
+<span class="k">COPY</span> ./requirements.txt /tmp/
+<span class="k">RUN</span> pip install --no-cache-dir -r /tmp/requirements.txt
+
+<span class="c"># Custom addons</span>
+<span class="k">COPY</span> ./custom_addons /mnt/extra-addons
+<span class="k">RUN</span> chown -R odoo:odoo /mnt/extra-addons
+
+<span class="k">COPY</span> ./odoo.conf /etc/odoo/
+<span class="k">USER</span> odoo
+
+<span class="k">HEALTHCHECK</span> --interval=30s --timeout=10s \
+  CMD curl -f http://localhost:8069/web/health || exit 1
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">What is a multi-stage Docker build and why is it important for production?</div>
+        <div class="iq-a"><strong>Answer:</strong> Multi-stage builds use multiple FROM statements. Early stages compile/build the application (including dev dependencies, build tools, compilers). The final stage copies only the compiled artifacts from earlier stages into a minimal base image. <strong>Why it matters:</strong> 1) Dramatically smaller final images (Next.js: 1.2GB dev → 150MB production). 2) No build secrets, dev tools, or source code in production image. 3) Reduced attack surface. 4) Faster deployment pulls. <strong>Example for Next.js:</strong> Stage 1 (node:18) installs all deps and runs <code>next build</code>. Stage 2 (node:18-alpine) copies only .next/standalone and serves it. Result: ~85% image size reduction.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W6</span>
+      <span class="module-title">Docker Compose — Production Stack</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 6</span><span class="badge b-crit">CRITICAL</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>docker-compose.yml structure (v3.8+)</li>
+            <li>Named volumes vs bind mounts</li>
+            <li>Networks: bridge, overlay, custom</li>
+            <li>Depends_on with health conditions</li>
+            <li>Environment files, secrets management</li>
+            <li>Compose profiles (dev/staging/prod)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Single docker-compose.yml for all 6 services</li>
+            <li>Odoo depends on PostgreSQL being healthy</li>
+            <li>FastAPI depends on PostgreSQL + Redis</li>
+            <li>Separate .env.dev / .env.prod files</li>
+            <li>Named volumes for Postgres data, Odoo filestore</li>
+            <li>Internal network (db tier) vs public network (web tier)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case</div>
+        <h4>Full-Stack Production Compose</h4>
+        <p>Build a docker-compose.yml that runs: PostgreSQL 15 with persistent volume, Redis 7 with AOF persistence, Odoo 16 with custom addons and filestore volume, FastAPI with uvicorn workers, Next.js with static file serving, Nginx reverse proxy with SSL termination. All services on an internal Docker network. Only Nginx exposed on port 80/443. This is a real deliverable you can deploy to any Linux server.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">How do you manage secrets in Docker Compose for production? What should you never do?</div>
+        <div class="iq-a"><strong>What NEVER to do:</strong> Never put secrets in docker-compose.yml directly, never in image build args (they appear in layer history), never in environment variables in the Dockerfile. <strong>Correct approaches for production:</strong> 1) Docker Secrets (Swarm mode) — secrets mounted as files at /run/secrets/. 2) External secrets manager — HashiCorp Vault, Azure Key Vault, AWS Secrets Manager. Application fetches at runtime, not build time. 3) Environment file injection at deploy time — .env file not in repo, injected by CI/CD pipeline. 4) Kubernetes Secrets (when using K8s). <strong>For Compose specifically:</strong> Use <code>env_file: .env.prod</code> where .env.prod is in .gitignore and managed by your deployment system.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W7-8</span>
+      <span class="module-title">Docker Networking, Registry & Security</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 7-8</span><span class="badge b-med">INTERMEDIATE</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>Docker Hub, Azure Container Registry (ACR), GHCR</li>
+            <li>Image tagging strategy (latest, semver, git SHA)</li>
+            <li>Container security scanning (Trivy, Snyk)</li>
+            <li>Non-root users in containers</li>
+            <li>Read-only filesystem, dropped capabilities</li>
+            <li>Docker layer inspection and SBOM</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Push all 3 app images to Azure Container Registry</li>
+            <li>Tag: odoo:16.0-20260127-a1b2c3 (version-date-gitsha)</li>
+            <li>Trivy scan integrated into pre-push hook</li>
+            <li>Run FastAPI as non-root (uid 1000)</li>
+            <li>Read-only Next.js container with tmpfs for /tmp</li>
+            <li>Automated base image updates (Dependabot)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">A security scan found a HIGH severity CVE in your Odoo base image. How do you handle this in a CI/CD pipeline?</div>
+        <div class="iq-a"><strong>Systematic response:</strong> 1) Scan early — integrate Trivy into the CI pipeline, run on every build before push. 2) Define policy — HIGH severity blocks the pipeline, CRITICAL triggers immediate incident. MEDIUM/LOW goes to backlog. 3) For the specific CVE: check if it affects your usage (many CVEs are in packages you don't use). 4) Fix path: rebuild with updated base image. 5) If upstream hasn't patched: consider multi-stage build to install patched version manually. 6) Add CVE to allowlist with expiry date and Jira ticket if a temporary bypass is needed. 7) Document all CVEs and their status in a security runbook. 8) Never deploy CRITICAL or unreviewed HIGH severity containers to production.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 3 ============================== -->
+<div class="section" id="section-m3">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(255,107,53,0.2)">03</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(255,107,53,0.1);color:var(--accent3);border:1px solid rgba(255,107,53,0.2);">MONTH 3 · WEEKS 9–12</div>
+      <div class="phase-title">CI/CD Pipelines — Automate Everything</div>
+      <div class="phase-desc">The core skill that justifies your entire DevOps role. By month-end you'll have GitHub Actions pipelines for all 3 applications with full test, build, push, deploy automation.</div>
+      <div class="phase-pills">
+        <span class="pill">GitHub Actions</span><span class="pill">GitLab CI</span><span class="pill">Pipeline design</span>
+        <span class="pill">Automated testing</span><span class="pill">Deployment strategies</span><span class="pill">Rollback</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W9</span>
+      <span class="module-title">CI/CD Concepts & GitHub Actions</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 9</span><span class="badge b-crit">CRITICAL</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core CI/CD Concepts</h4>
+          <ul>
+            <li>CI vs CD vs CD (Delivery vs Deployment)</li>
+            <li>Pipeline stages: source → build → test → scan → push → deploy</li>
+            <li>Artifact management and versioning</li>
+            <li>Environment promotion (dev → staging → prod)</li>
+            <li>Approval gates and manual checkpoints</li>
+            <li>Deployment strategies (rolling, blue-green, canary)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>GitHub Actions Specifics</h4>
+          <ul>
+            <li>Workflow YAML syntax (.github/workflows/)</li>
+            <li>Triggers: push, PR, schedule, workflow_dispatch</li>
+            <li>Jobs, steps, runners (ubuntu-latest)</li>
+            <li>Reusable workflows and composite actions</li>
+            <li>GitHub Secrets and OIDC authentication</li>
+            <li>Matrix builds for multi-version testing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case — Build All Three</div>
+        <h4>Pipeline 1: FastAPI CI/CD</h4>
+        <p>On every push to main: run pytest with coverage (fail if &lt;80%), run Bandit security scan, build Docker image with git SHA tag, push to Azure Container Registry, deploy to staging via SSH, run smoke tests against staging, deploy to production with manual approval. On PR: run linting (ruff), type checking (mypy), unit tests only.</p>
+      </div>
+      <div class="code-block">
+<span class="c"># .github/workflows/fastapi-cicd.yml</span>
+<span class="v">name</span>: FastAPI CI/CD
+<span class="v">on</span>:
+  <span class="v">push</span>: { <span class="v">branches</span>: [main] }
+  <span class="v">pull_request</span>: { <span class="v">branches</span>: [main] }
+
+<span class="v">jobs</span>:
+  <span class="v">test</span>:
+    <span class="v">runs-on</span>: ubuntu-latest
+    <span class="v">steps</span>:
+      - <span class="v">uses</span>: actions/checkout@v4
+      - <span class="v">name</span>: Run tests
+        <span class="v">run</span>: |
+          pip install -r requirements.txt
+          pytest --cov=app --cov-fail-under=80
+
+  <span class="v">build-push</span>:
+    <span class="v">needs</span>: test
+    <span class="v">if</span>: github.ref == <span class="s">'refs/heads/main'</span>
+    <span class="v">steps</span>:
+      - <span class="v">name</span>: Build and push
+        <span class="v">run</span>: |
+          <span class="v">TAG</span>=<span class="s">"${{ github.sha }}"</span>
+          docker build -t myacr.azurecr.io/fastapi:<span class="v">$TAG</span> .
+          docker push myacr.azurecr.io/fastapi:<span class="v">$TAG</span>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Explain the difference between Blue-Green and Canary deployment. When would you use each?</div>
+        <div class="iq-a"><strong>Blue-Green:</strong> Two identical environments (Blue = current prod, Green = new version). You deploy to Green, test it, then switch load balancer from Blue to Green. Rollback is instant (switch back). Best for: stateless apps, high-risk deployments, when you can afford double the infrastructure cost. <strong>Canary:</strong> New version receives small % of traffic (5%), monitor errors/latency, gradually increase if healthy. Best for: high-traffic apps, when you want real user validation, stateful services. <strong>For your stack:</strong> Use Blue-Green for Odoo ERP releases (complex, high-risk, infrequent). Use Canary for FastAPI microservices (frequent deployments, easy to roll back at load balancer level).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W10-12</span>
+      <span class="module-title">Advanced Pipeline: Testing, Scanning & Multi-App</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 10-12</span><span class="badge b-hard">ADVANCED</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Testing in CI</h4>
+          <ul>
+            <li>Unit tests (pytest, Jest) in pipeline</li>
+            <li>Integration tests with Docker service containers</li>
+            <li>E2E tests (Playwright) on staging</li>
+            <li>Test parallelization and caching</li>
+            <li>Coverage gates (fail below 80%)</li>
+            <li>API contract testing (Schemathesis for FastAPI)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Security in Pipeline (DevSecOps)</h4>
+          <ul>
+            <li>SAST: Bandit (Python), ESLint security (JS)</li>
+            <li>SCA: pip-audit, npm audit, Dependabot</li>
+            <li>Container scan: Trivy on every Docker build</li>
+            <li>Secret detection: GitLeaks, detect-secrets</li>
+            <li>DAST: ZAP scan on staging</li>
+            <li>License compliance check</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case</div>
+        <h4>Odoo Custom Module CI Pipeline</h4>
+        <p>Challenge: Odoo custom addons have no standard test runner in CI. Build a pipeline that: starts a PostgreSQL + Odoo test instance via docker-compose in GitHub Actions, installs your custom addons, runs odoo -i module_name --test-enable, parses test output for failures, generates a test report, and tears down the stack. This demonstrates enterprise-level thinking for ERP systems.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Your CI pipeline takes 45 minutes. How do you reduce it to under 10 minutes?</div>
+        <div class="iq-a"><strong>Systematic optimization:</strong> 1) Measure first — add timing to each step, identify the slowest (usually tests + Docker builds). 2) Parallelize — run lint, test, security scan as parallel jobs. 3) Cache aggressively — pip/npm packages, Docker layers, test results. 4) Split test suites — run unit tests in CI on every commit (fast), integration tests only on merge to main. 5) Optimize Docker builds — order layers from least to most frequently changing (COPY requirements.txt before COPY ./app). 6) Use matrix builds carefully — don't test Python 3.8/3.9/3.10 on every commit. 7) Use self-hosted runners for heavy jobs. 8) Implement test parallelization (pytest-xdist). Real-world result: FastAPI pipeline from 28min → 7min using these techniques.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 4 ============================== -->
+<div class="section" id="section-m4">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(167,139,250,0.2)">04</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(167,139,250,0.1);color:var(--accent4);border:1px solid rgba(167,139,250,0.2);">MONTH 4 · WEEKS 13–16</div>
+      <div class="phase-title">Cloud (Azure) & Infrastructure as Code</div>
+      <div class="phase-desc">This is where DevOps meets Solution Architecture. Azure + Terraform is the combination that unlocks senior and architect-level roles in the GCC and European markets.</div>
+      <div class="phase-pills">
+        <span class="pill">Azure Core Services</span><span class="pill">Terraform</span><span class="pill">Azure DevOps</span>
+        <span class="pill">VNet & Networking</span><span class="pill">AKS</span><span class="pill">Managed Databases</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W13</span>
+      <span class="module-title">Azure Core Services for DevOps</span>
+      <div class="module-badges"><span class="badge b-week">WEEK 13</span><span class="badge b-crit">CRITICAL</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Azure Services to Master</h4>
+          <ul>
+            <li>ACI (Azure Container Instances) — simple container hosting</li>
+            <li>ACA (Azure Container Apps) — serverless containers</li>
+            <li>ACR (Azure Container Registry) — private image registry</li>
+            <li>Azure Database for PostgreSQL — managed DB</li>
+            <li>Azure Cache for Redis — managed Redis</li>
+            <li>Azure Blob Storage — file storage, backups</li>
+            <li>Azure Key Vault — secrets management</li>
+            <li>Azure Application Gateway — L7 load balancer</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Deploy FastAPI to Azure Container Apps (auto-scale)</li>
+            <li>Migrate Odoo filestore to Azure Blob Storage</li>
+            <li>Move PostgreSQL to Azure Database for PostgreSQL Flexible Server</li>
+            <li>All secrets (DB password, API keys) in Azure Key Vault</li>
+            <li>Odoo backups automated to Azure Blob via lifecycle policy</li>
+            <li>Application Gateway for SSL + WAF in front of all apps</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mentor-callout">
+        <div class="mc-label">Mentor Note — Architecture Framing</div>
+        <p>When you document this on your CV, don't write "deployed apps to Azure." Write: "Designed and implemented a multi-tier Azure architecture for a 3-application ERP stack, achieving 99.9% uptime SLA with managed PostgreSQL HA, Redis with geo-replication, and automated backup lifecycle policies reducing storage costs by 40%." Same work, architect framing. This is the difference in how you get hired.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">When would you use Azure Container Apps vs AKS (Azure Kubernetes Service)?</div>
+        <div class="iq-a"><strong>Azure Container Apps:</strong> Serverless containers. No cluster management. Auto-scales to zero. Best for: microservices with variable traffic (your FastAPI is a perfect fit), event-driven workloads, teams without K8s expertise. Limitations: less control, can't run stateful workloads well. <strong>AKS:</strong> Managed Kubernetes. Full control. Best for: complex microservices with service mesh, stateful workloads, when you need custom ingress controllers, GPU workloads. Requires K8s expertise to operate. <strong>For your stack recommendation:</strong> FastAPI on Container Apps (variable traffic, scales to zero at night = 70% cost savings). Odoo on dedicated ACI or VM (stateful ERP shouldn't scale to zero). Next.js on Azure Static Web Apps or Container Apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W14-16</span>
+      <span class="module-title">Terraform — Infrastructure as Code</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 14-16</span><span class="badge b-hard">ADVANCED</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>HCL syntax, providers, resources, data sources</li>
+            <li>State management (local vs remote in Azure Blob)</li>
+            <li>Variables, outputs, locals, modules</li>
+            <li>Plan → Apply → Destroy lifecycle</li>
+            <li>Workspaces (dev/staging/prod)</li>
+            <li>Import existing infrastructure</li>
+            <li>Terraform in CI/CD (terraform plan on PR)</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Provision entire stack with Terraform (VNet, subnets, NSGs, PostgreSQL, Redis, ACR, Key Vault)</li>
+            <li>Remote state in Azure Blob with state locking</li>
+            <li>Modular structure: modules/networking, modules/database, modules/app</li>
+            <li>terraform.tfvars.dev / .staging / .prod</li>
+            <li>GitHub Actions: terraform plan on PR, terraform apply on merge</li>
+            <li>Destroy protection on production resources</li>
+          </ul>
+        </div>
+      </div>
+      <div class="code-block">
+<span class="c"># terraform/modules/database/main.tf</span>
+<span class="v">resource</span> <span class="s">"azurerm_postgresql_flexible_server"</span> <span class="s">"odoo"</span> {
+  <span class="v">name</span>                   = <span class="s">"odoo-pg-${var.environment}"</span>
+  <span class="v">resource_group_name</span>    = var.resource_group
+  <span class="v">location</span>               = var.location
+  <span class="v">version</span>                = <span class="s">"15"</span>
+  <span class="v">administrator_login</span>    = var.pg_admin_user
+  <span class="v">administrator_password</span> = data.azurerm_key_vault_secret.<span class="f">pg_password</span>.value
+  
+  <span class="v">sku_name</span>   = var.environment == <span class="s">"prod"</span> ? <span class="s">"GP_Standard_D4s_v3"</span> : <span class="s">"B_Standard_B2s"</span>
+  <span class="v">storage_mb</span> = <span class="v">32768</span>
+  
+  <span class="v">high_availability</span> {
+    <span class="v">mode</span>                      = var.environment == <span class="s">"prod"</span> ? <span class="s">"ZoneRedundant"</span> : <span class="s">"Disabled"</span>
+    <span class="v">standby_availability_zone</span> = <span class="s">"2"</span>
+  }
+}
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">How do you handle Terraform state in a team environment, and what problems arise with state?</div>
+        <div class="iq-a"><strong>The state problem:</strong> Default local state breaks in teams — two engineers running apply simultaneously corrupt state. <strong>Solution — Remote state with locking:</strong> Store state in Azure Blob (or S3/Terraform Cloud). Backend config: <code>backend "azurerm" { storage_account_name, container_name, key }</code>. Azure Blob provides state locking via leases — second apply attempt waits until lock is released. <strong>State gotchas to know:</strong> 1) Never manually edit state file. 2) Use <code>terraform state mv</code> for refactoring, not delete+recreate. 3) <code>terraform import</code> for existing resources. 4) Sensitive values in state are stored in plaintext — encrypt your storage. 5) State per workspace (dev/staging/prod) isolates blast radius. <strong>State drift:</strong> Use <code>terraform plan</code> in CI on every PR to detect drift before it reaches production.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 5 ============================== -->
+<div class="section" id="section-m5">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(251,191,36,0.2)">05</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(251,191,36,0.1);color:var(--accent5);border:1px solid rgba(251,191,36,0.2);">MONTH 5 · WEEKS 17–20</div>
+      <div class="phase-title">Kubernetes & Container Orchestration</div>
+      <div class="phase-desc">The skill that separates mid-level from senior DevOps. You need operational confidence with K8s, not just YAML writing. Every enterprise client running containers at scale uses Kubernetes.</div>
+      <div class="phase-pills">
+        <span class="pill">Pods & Deployments</span><span class="pill">Services & Ingress</span><span class="pill">ConfigMaps & Secrets</span>
+        <span class="pill">HPA & VPA</span><span class="pill">Helm Charts</span><span class="pill">AKS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W17-18</span>
+      <span class="module-title">Kubernetes Core — Workloads & Networking</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 17-18</span><span class="badge b-hard">ADVANCED</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core K8s Objects</h4>
+          <ul>
+            <li>Pod, ReplicaSet, Deployment, StatefulSet, DaemonSet</li>
+            <li>Service types: ClusterIP, NodePort, LoadBalancer</li>
+            <li>Ingress + IngressController (Nginx, Traefik)</li>
+            <li>ConfigMap and Secret management</li>
+            <li>Persistent Volumes and PersistentVolumeClaims</li>
+            <li>Namespaces for environment isolation</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Deploy FastAPI as Deployment with 3 replicas</li>
+            <li>Next.js as Deployment with HPA (scale 2-10 on CPU)</li>
+            <li>PostgreSQL as StatefulSet with PVC (or Azure Database)</li>
+            <li>Ingress: api.myapp.com → fastapi-svc, app.myapp.com → nextjs-svc</li>
+            <li>ConfigMap for Odoo config, K8s Secret for DB password</li>
+            <li>Separate namespaces: odoo, fastapi, monitoring</li>
+          </ul>
+        </div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Explain the difference between a Deployment and a StatefulSet. Why does Odoo require special consideration in Kubernetes?</div>
+        <div class="iq-a"><strong>Deployment:</strong> Manages stateless pods. Pods are interchangeable — K8s can kill any pod and replace it. Network identity changes with each pod restart. Best for: FastAPI, Next.js, any 12-factor app. <strong>StatefulSet:</strong> Manages stateful pods. Gives each pod a stable network identity (pod-0, pod-1) and stable storage. Ordered, graceful scaling. Best for: PostgreSQL, Elasticsearch, Zookeeper. <strong>Odoo complexity in K8s:</strong> Odoo stores attachments on the filesystem (/var/lib/odoo/filestore). In K8s, this must be backed by a PersistentVolume. But if you run 3 Odoo replicas, all 3 need access to the same filestore — requiring ReadWriteMany (RWX) PVC, typically Azure Files or NFS. This is expensive and slow. Better pattern: Migrate Odoo filestore to Azure Blob Storage (S3-compatible) using the ir.attachment model override. Then Odoo becomes stateless and can run as a normal Deployment.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W19-20</span>
+      <span class="module-title">Helm, HPA, and AKS Production Setup</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 19-20</span><span class="badge b-hard">ADVANCED</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Helm</h4>
+          <ul>
+            <li>Chart structure (Chart.yaml, values.yaml, templates/)</li>
+            <li>Templating with Go templates</li>
+            <li>Installing, upgrading, rolling back releases</li>
+            <li>values.yaml per environment</li>
+            <li>Chart repositories (ArtifactHub, custom)</li>
+            <li>Helm hooks for database migrations</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Scaling & Production</h4>
+          <ul>
+            <li>Horizontal Pod Autoscaler (HPA) — CPU/memory based</li>
+            <li>Vertical Pod Autoscaler (VPA) — right-sizing</li>
+            <li>Resource requests and limits (mandatory in production)</li>
+            <li>Pod Disruption Budgets for HA</li>
+            <li>Node pools in AKS (system vs user nodes)</li>
+            <li>Cluster Autoscaler for dynamic node scaling</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case</div>
+        <h4>Helm Chart for FastAPI Service</h4>
+        <p>Create a production Helm chart for your FastAPI service with: environment-specific values (dev has 1 replica, prod has 3), automatic DB migration as a Helm pre-upgrade hook, HPA scaling from 2-10 replicas on 70% CPU, readiness and liveness probes, PodDisruptionBudget to ensure minimum 2 pods always running during updates, and Azure Workload Identity for Key Vault access instead of static secrets.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">A pod in your cluster keeps restarting (CrashLoopBackOff). What is your debugging process?</div>
+        <div class="iq-a"><strong>Systematic debugging:</strong> 1) <code>kubectl get pods -n namespace</code> — see restart count and status. 2) <code>kubectl describe pod [pod-name]</code> — check Events section for crash reason. 3) <code>kubectl logs [pod-name] --previous</code> — logs from the crashed container instance. 4) If OOMKilled: pod exceeded memory limit. Increase limit or fix memory leak. 5) If application error: fix the app bug, rebuild, redeploy. 6) If probe failure: liveness probe too aggressive, or app startup time exceeds initialDelaySeconds. 7) Check if ConfigMap/Secret referenced exists: <code>kubectl get configmap, secret</code>. 8) If image pull error: check imagePullSecrets, registry credentials. 9) Check resource limits: is the node out of resources? <code>kubectl describe node</code>. Real tip: Always set <code>terminationMessagePath</code> in container spec — it captures the last few KB of crash output even when logs aren't available.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== MONTH 6 ============================== -->
+<div class="section" id="section-m6">
+  <div class="phase-header">
+    <div class="phase-num" style="color:rgba(239,68,68,0.2)">06</div>
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.2);">MONTH 6 · WEEKS 21–24</div>
+      <div class="phase-title">Observability, SRE & DevSecOps</div>
+      <div class="phase-desc">The month that takes you from "someone who deploys" to "someone who owns production." Observability is the most underrated DevOps skill and the most asked about in senior interviews.</div>
+      <div class="phase-pills">
+        <span class="pill">Prometheus</span><span class="pill">Grafana</span><span class="pill">ELK Stack</span>
+        <span class="pill">Alerting</span><span class="pill">SLO/SLA</span><span class="pill">Incident Response</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W21-22</span>
+      <span class="module-title">Prometheus, Grafana & Metrics</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 21-22</span><span class="badge b-crit">CRITICAL</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Core Topics</h4>
+          <ul>
+            <li>The 4 Golden Signals: Latency, Traffic, Errors, Saturation</li>
+            <li>Prometheus: metrics types (counter, gauge, histogram, summary)</li>
+            <li>PromQL: querying, aggregation, alerting rules</li>
+            <li>Grafana: dashboards, data sources, variables</li>
+            <li>AlertManager: routing, silencing, inhibition</li>
+            <li>SLO/SLA/SLI definitions and error budgets</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>Applied to Your Stack</h4>
+          <ul>
+            <li>Instrument FastAPI with prometheus_fastapi_instrumentator</li>
+            <li>Expose Odoo metrics via postgres_exporter + nginx_exporter</li>
+            <li>Grafana dashboard: requests/sec, p95 latency, error rate for all 3 apps</li>
+            <li>Alert: error rate > 1% for 5 minutes → PagerDuty</li>
+            <li>Alert: PostgreSQL connections > 80% of max_connections</li>
+            <li>Define SLO: 99.5% availability, p99 latency < 500ms</li>
+          </ul>
+        </div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">What is an error budget and how would you use one for your Odoo application?</div>
+        <div class="iq-a"><strong>Error budget definition:</strong> If your SLO is 99.9% availability, you have 0.1% allowed downtime per month = ~43 minutes/month. That 43 minutes is your error budget. <strong>How to use it:</strong> If you've consumed 80% of your error budget this month, you slow down new feature deployments and focus on reliability work. If you have budget remaining, teams can deploy more aggressively. <strong>For Odoo specifically:</strong> Track availability via synthetic monitoring (Blackbox Exporter hitting /web/health every 30s). Track slow queries that cause timeouts. Define: "A user request is a failure if it returns 5xx OR takes > 5 seconds." Set alert at 50% budget consumed. This turns abstract SLAs into an engineering decision tool — it's the conversation that elevates you from deployer to architect in client discussions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">W23-24</span>
+      <span class="module-title">ELK Stack, DevSecOps & Incident Response</span>
+      <div class="module-badges"><span class="badge b-week">WEEKS 23-24</span><span class="badge b-hard">ADVANCED</span></div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Logging with ELK</h4>
+          <ul>
+            <li>Elasticsearch: indexing, mapping, ILM policies</li>
+            <li>Logstash / Filebeat: log shipping from apps</li>
+            <li>Kibana: log search, visualization, alerting</li>
+            <li>Structured logging (JSON) in FastAPI, Odoo</li>
+            <li>Log retention policies (hot/warm/cold)</li>
+            <li>Correlation IDs across microservices</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>DevSecOps & Incident Response</h4>
+          <ul>
+            <li>Principle of Least Privilege in K8s (RBAC, ServiceAccounts)</li>
+            <li>Network Policies to restrict pod-to-pod communication</li>
+            <li>Secrets scanning in Git (GitLeaks)</li>
+            <li>Runbooks: document every alert with response procedure</li>
+            <li>Blameless post-mortems (5 Whys)</li>
+            <li>On-call rotation structure and escalation policy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">Enterprise Use Case</div>
+        <h4>Full Observability Stack for Your 3 Applications</h4>
+        <p>Deploy a complete observability stack on Kubernetes: Prometheus + AlertManager (metrics), Grafana (dashboards for all 3 apps), Loki (lightweight alternative to ELK for logs), Filebeat shipping Odoo + FastAPI logs to Elasticsearch, Kibana dashboard showing error rates per service, distributed tracing with Jaeger for FastAPI API calls to understand end-to-end latency, and synthetic monitoring with Blackbox Exporter for SLO tracking. This is a portfolio-grade deliverable that very few candidates have.</p>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERVIEW QUESTION</div>
+        <div class="iq-q">Production is down at 2 AM. Walk me through your incident response process.</div>
+        <div class="iq-a"><strong>Incident Response Framework (ITSM-aligned):</strong> 1) Acknowledge (PagerDuty alert, ack within 5 min). 2) Assess severity — is it all users or some? One region or all? What's the blast radius? 3) Communicate — post to #incidents Slack: "Investigating elevated error rates on Odoo. ETA for update: 15min." Never go quiet. 4) Diagnose — start with Grafana: error rate spike (when did it start?), then correlate with deployments (was anything released in the last 2 hrs?), then check logs in Kibana for exceptions. 5) Mitigate — options: rollback deployment, scale up pods, restart misbehaving pods, failover DB. Choose fastest mitigation, not root cause fix. 6) Communicate resolution: "Issue resolved at 02:47. Root cause: memory leak in Odoo worker. Mitigation: rolled back to v1.2.3." 7) Next day: blameless post-mortem. Document timeline, root cause, 3 action items with owners. <strong>Critical:</strong> Never blame individuals. Focus on system and process improvements.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== PROJECTS ============================== -->
+<div class="section" id="section-projects">
+  <div class="phase-header">
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(34,197,94,0.1);color:var(--success);border:1px solid rgba(34,197,94,0.2);">PORTFOLIO PROJECTS</div>
+      <div class="phase-title">8 Real Projects — Your Interview Evidence</div>
+      <div class="phase-desc">Every project is built on your actual stack. Each one becomes a case study with measurable outcomes you can articulate in an interview. GitHub repos with proper READMEs are mandatory.</div>
+    </div>
+  </div>
+
+  <div class="project-card proj-p1">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 01 · Month 1–2</div>
+        <div class="proj-title">Production-Ready Docker Stack for Odoo + FastAPI + Next.js</div>
+        <div class="proj-sub">Full containerization of your existing 3-app stack</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">Docker</span><span class="proj-tag">Docker Compose</span><span class="proj-tag">Nginx</span>
+      <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Redis</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>Multi-service Docker Compose with 6 containers (Nginx, Odoo, FastAPI, Next.js, PostgreSQL, Redis)</li>
+        <li>Multi-stage Dockerfile for each application (optimized image sizes)</li>
+        <li>Nginx reverse proxy routing all traffic with SSL termination</li>
+        <li>Named volumes for data persistence, proper secrets management</li>
+        <li>Health checks, restart policies, and resource limits on all containers</li>
+        <li>Makefile with common commands: make up, make down, make logs, make backup</li>
+      </ul>
+    </div>
+    <div class="proj-section">
+      <h5>Measurable Outcomes to Document</h5>
+      <ul>
+        <li>Container startup time: full stack from cold start in under 90 seconds</li>
+        <li>Image size reduction: Next.js from ~1.1GB to ~150MB using multi-stage</li>
+        <li>Zero-secrets-in-code: all credentials via env files + Docker secrets</li>
+        <li>One-command deployment: docker compose up -d deploys entire stack</li>
+      </ul>
+    </div>
+    <div class="proj-section">
+      <h5>Portfolio README Must Include</h5>
+      <ul>
+        <li>Architecture diagram showing all 6 services and network flow</li>
+        <li>Security considerations section (non-root users, read-only filesystems)</li>
+        <li>Performance benchmarks before vs after containerization</li>
+        <li>Known limitations and future improvements (K8s migration path)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p2">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 02 · Month 2–3</div>
+        <div class="proj-title">Automated Backup & Recovery System</div>
+        <div class="proj-sub">Production-grade PostgreSQL backup pipeline with Azure integration</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">Bash</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">Azure Blob</span>
+      <span class="proj-tag">Cron</span><span class="proj-tag">Monitoring</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>Bash script: pg_dump with compression, Azure Blob upload, retention policy (30 daily / 12 monthly)</li>
+        <li>Automated restore script with point-in-time recovery capability</li>
+        <li>Backup monitoring: Prometheus metrics (last backup age, backup size, upload duration)</li>
+        <li>Grafana alert: "No successful backup in 25 hours" → PagerDuty/Slack</li>
+        <li>Monthly restore drill: GitHub Action that restores backup to staging and runs smoke tests</li>
+        <li>Encrypted backups using GPG before upload</li>
+      </ul>
+    </div>
+    <div class="proj-section">
+      <h5>Why This is a Portfolio Winner</h5>
+      <ul>
+        <li>80% of companies have inadequate backup verification — you solved it completely</li>
+        <li>Shows SRE mindset: monitoring the monitoring (backup health metrics)</li>
+        <li>The monthly restore drill is something most "senior" engineers skip</li>
+        <li>Direct business value: "I implemented backup automation that reduced RTO from 4 hours to 20 minutes"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p3">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 03 · Month 3</div>
+        <div class="proj-title">Full CI/CD Pipeline for All 3 Applications</div>
+        <div class="proj-sub">GitHub Actions with test, scan, build, push, deploy automation</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">GitHub Actions</span><span class="proj-tag">Docker</span><span class="proj-tag">ACR</span>
+      <span class="proj-tag">Trivy</span><span class="proj-tag">pytest</span><span class="proj-tag">Jest</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>FastAPI pipeline: lint → test (80% coverage gate) → Bandit scan → Docker build → Trivy scan → push ACR → deploy staging → smoke test → manual approval → deploy prod</li>
+        <li>Next.js pipeline: ESLint → Jest → build → Docker build → push → Vercel/ACA deploy</li>
+        <li>Odoo pipeline: install deps → run odoo test runner → check custom addon code quality</li>
+        <li>Shared reusable workflow for Docker build + Trivy scan (DRY principle)</li>
+        <li>Branch protection: PRs require all CI checks to pass before merge</li>
+        <li>Slack notifications: PR check results + deployment status</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p4">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 04 · Month 4</div>
+        <div class="proj-title">Azure Infrastructure — Full IaC with Terraform</div>
+        <div class="proj-sub">Entire production environment provisioned from code</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">Terraform</span><span class="proj-tag">Azure</span><span class="proj-tag">VNet</span>
+      <span class="proj-tag">Key Vault</span><span class="proj-tag">PostgreSQL Flexible</span><span class="proj-tag">ACR</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>Terraform modules: networking (VNet, subnets, NSGs), database (PostgreSQL Flexible, Redis), app (Container Apps, ACR), security (Key Vault, managed identities)</li>
+        <li>Three workspaces: dev (cheapest SKUs), staging, prod (HA enabled)</li>
+        <li>Remote state in Azure Blob with state locking</li>
+        <li>All secrets fetched from Key Vault at runtime (no secrets in Terraform state)</li>
+        <li>terraform plan runs on every PR, terraform apply on merge to main</li>
+        <li>Cost estimation with Infracost (automated PR comment showing monthly cost diff)</li>
+      </ul>
+    </div>
+    <div class="proj-section">
+      <h5>Measurable Outcomes</h5>
+      <ul>
+        <li>Full environment provisioned in under 8 minutes from zero</li>
+        <li>Identical dev/staging/prod environments (infrastructure drift eliminated)</li>
+        <li>Cost visibility: Infracost shows every PR's infrastructure cost change</li>
+        <li>Disaster recovery: entire environment can be recreated from Terraform code in one command</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p5">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 05 · Month 5</div>
+        <div class="proj-title">Kubernetes Deployment on AKS with Helm</div>
+        <div class="proj-sub">Full K8s migration of FastAPI and Next.js with autoscaling</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">Kubernetes</span><span class="proj-tag">AKS</span><span class="proj-tag">Helm</span>
+      <span class="proj-tag">HPA</span><span class="proj-tag">Ingress</span><span class="proj-tag">Cert-Manager</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>AKS cluster provisioned with Terraform (system node pool + user node pool)</li>
+        <li>Helm chart for FastAPI: deployment, service, ingress, HPA, configmap, PDB</li>
+        <li>Cert-Manager for automatic TLS certificate management</li>
+        <li>Azure Workload Identity for pod-level Azure resource access (no static secrets)</li>
+        <li>Cluster Autoscaler: scale nodes 2-10 based on pod pending state</li>
+        <li>Network Policies: FastAPI pods can only talk to PostgreSQL and Redis namespaces</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p5" style="border-top-color: var(--accent5);">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 06 · Month 6</div>
+        <div class="proj-title">Full Observability Stack</div>
+        <div class="proj-sub">Prometheus + Grafana + Loki + Jaeger for all 3 applications</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">Prometheus</span><span class="proj-tag">Grafana</span><span class="proj-tag">Loki</span>
+      <span class="proj-tag">Jaeger</span><span class="proj-tag">AlertManager</span><span class="proj-tag">SLO</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>Kube-Prometheus-Stack via Helm: Prometheus, Grafana, AlertManager, node exporters</li>
+        <li>Custom Grafana dashboards: one per application (latency, error rate, throughput, saturation)</li>
+        <li>Loki + Promtail for log aggregation from all pods</li>
+        <li>Jaeger distributed tracing in FastAPI (OpenTelemetry SDK)</li>
+        <li>SLO dashboard: availability and latency SLOs with error budget burn rate</li>
+        <li>Runbook links in every alert — each alert links to its Confluence/Notion runbook</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p3" style="">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 07 · Month 5–6 (BONUS)</div>
+        <div class="proj-title">GitOps with ArgoCD</div>
+        <div class="proj-sub">Declarative continuous delivery — the 2026 enterprise standard</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">ArgoCD</span><span class="proj-tag">GitOps</span><span class="proj-tag">Helm</span>
+      <span class="proj-tag">App of Apps</span><span class="proj-tag">RBAC</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build</h5>
+      <ul>
+        <li>ArgoCD installed on AKS cluster, UI accessible via Ingress</li>
+        <li>ArgoCD Application for each service (FastAPI, Next.js) pointing to Helm charts in Git</li>
+        <li>App of Apps pattern: one parent ArgoCD app manages all child apps</li>
+        <li>Automated sync: ArgoCD detects Git commit → automatically syncs K8s cluster</li>
+        <li>RBAC: developer role can view but not sync prod, DevOps role can manage all</li>
+        <li>Drift detection: ArgoCD alerts if someone manually changes K8s resources</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="project-card proj-p2" style="">
+    <div class="proj-header">
+      <div class="proj-title-group">
+        <div class="proj-num">PROJECT 08 · Month 6 (CAPSTONE)</div>
+        <div class="proj-title">Enterprise DevOps Platform — Complete Architecture</div>
+        <div class="proj-sub">End-to-end: code commit to production with full observability</div>
+      </div>
+    </div>
+    <div class="proj-tags">
+      <span class="proj-tag">All Skills</span><span class="proj-tag">Architecture</span><span class="proj-tag">Documentation</span>
+    </div>
+    <div class="proj-section">
+      <h5>What You Build (Full Platform)</h5>
+      <ul>
+        <li>Developer pushes code → GitHub Actions runs tests + security scans → builds Docker image → pushes to ACR</li>
+        <li>ArgoCD detects new image tag in Helm chart → syncs to AKS cluster</li>
+        <li>Kubernetes: rolling deployment with HPA, PDB ensuring zero downtime</li>
+        <li>Prometheus detects deployment → Grafana shows new version traffic → AlertManager monitors error rate</li>
+        <li>If error rate > threshold: automatic rollback via ArgoCD rollback policy</li>
+        <li>All infrastructure provisioned by Terraform, all secrets in Key Vault</li>
+        <li>Full ADR (Architecture Decision Records) documentation for all major decisions</li>
+      </ul>
+    </div>
+    <div class="proj-section">
+      <h5>Interview Story Framework</h5>
+      <ul>
+        <li>Situation: "Managing 3-application ERP stack for enterprise clients across 5 countries"</li>
+        <li>Task: "No CI/CD, manual deployments, no observability, single point of failure"</li>
+        <li>Action: "Designed and implemented full DevOps platform: containerization → CI/CD → IaC → K8s → observability"</li>
+        <li>Result: "Deployment time reduced from 2 hours to 8 minutes. MTTR reduced from 4 hours to 22 minutes. Zero production incidents due to bad deployments in 4 months."</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== INTERVIEW ============================== -->
+<div class="section" id="section-interview">
+  <div class="phase-header">
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(232,121,249,0.1);color:#e879f9;border:1px solid rgba(232,121,249,0.2);">INTERVIEW PREPARATION</div>
+      <div class="phase-title">150+ Interview Questions by Category</div>
+      <div class="phase-desc">Organized by topic and difficulty. For each question, you should answer using your actual project experience. Generic answers won't get you hired. "I built X using Y and it reduced Z by W%" wins interviews.</div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-1</span>
+      <span class="module-title">Docker & Containers (25 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">FOUNDATIONAL</div>
+        <div class="iq-q">What is the difference between a Docker image and a container?</div>
+        <div class="iq-a"><strong>Image:</strong> Read-only immutable blueprint. A layered filesystem snapshot. Like a class in OOP. Stored in registry. <strong>Container:</strong> Running instance of an image. Has a writable layer on top. Like an object instantiated from a class. Ephemeral by default — data is lost when container stops unless using volumes. <strong>Key insight for interviews:</strong> Never store application data inside a container's writable layer. Always use named volumes or bind mounts.</div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">INTERMEDIATE</div>
+        <div class="iq-q">How do you handle database schema migrations in a containerized environment?</div>
+        <div class="iq-a"><strong>Problem:</strong> Schema migration must run exactly once before new app version starts, not on every pod startup. <strong>Solutions:</strong> 1) Init container (K8s) that runs migrations before app container starts. 2) Docker Compose: migration service with depends_on app. 3) Helm hook: pre-upgrade Job that runs Alembic/Django migrate before deployment. 4) Separate migration pipeline step in CI/CD. <strong>For FastAPI + Alembic:</strong> Kubernetes initContainer runs <code>alembic upgrade head</code>, only starts app container on exit code 0. <strong>Critical:</strong> Migrations must be backward-compatible if you're running rolling deployments (old + new versions run simultaneously briefly).</div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">ADVANCED</div>
+        <div class="iq-q">How would you run 100 Docker containers on a single server efficiently?</div>
+        <div class="iq-a"><strong>Resource optimization:</strong> 1) Set memory limits on every container (without limits, one container can OOM the host). 2) Use CPU quotas (not reservations) — quotas limit burst, reservations guarantee. 3) Share base image layers — if all 100 containers use the same Python base, it's stored once. 4) Use alpine-based images to minimize filesystem overhead. 5) Limit container logging (json-file driver with max-size=50m). 6) Use container namespaces and cgroups properly. 7) Consider switching to Kubernetes for better bin-packing. 8) Use Docker's --memory-swap to control swap behavior. At 100 containers you likely need K8s or at minimum Docker Swarm for proper scheduling.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-2</span>
+      <span class="module-title">CI/CD & Pipelines (25 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">SCENARIO-BASED</div>
+        <div class="iq-q">A developer accidentally pushed a secret (API key) to GitHub. What do you do?</div>
+        <div class="iq-a"><strong>Immediate response (within minutes):</strong> 1) Revoke the compromised secret immediately at the source (AWS Console, Azure Portal, API provider). Don't wait to understand scope — revoke first. 2) Generate a new secret. 3) Update the secret in your secrets manager (Key Vault, Secrets Manager). 4) The secret is in Git history — it cannot be "deleted." Assume it's compromised. <strong>Git cleanup (after revocation):</strong> Use <code>git filter-repo</code> or BFG Repo Cleaner to remove from history, then force push (this rewrites history — coordinate with team). <strong>Prevention:</strong> Install GitLeaks as pre-commit hook. Add detect-secrets to CI. Use GHAS (GitHub Advanced Security) secret scanning. Set up automatic revocation via GitHub's secret scanning push protection.</div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">SYSTEM DESIGN</div>
+        <div class="iq-q">Design a CI/CD pipeline for an ERP system (like Odoo) that requires minimal downtime during deployments.</div>
+        <div class="iq-a"><strong>Odoo-specific challenges:</strong> Stateful (filestore), long-running background jobs, DB migrations, multi-process workers. <strong>Strategy:</strong> 1) Pre-deploy: run DB migrations in maintenance mode (short window). 2) Rolling restart: use Odoo's --stop-after-init for worker management. 3) Health check gate: new instance must pass health check before old one is killed. 4) Session handling: Redis for session storage (not file-based) so sessions survive pod restart. 5) Zero-downtime if no schema changes: replace Odoo containers while keeping DB and Redis intact. 6) Major version upgrades (16→17): blue-green with DB snapshot, test migration, cutover. <strong>Key insight:</strong> You can't have true zero-downtime Odoo deployments with breaking DB migrations — honest communication with clients about maintenance windows is part of architect maturity.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-3</span>
+      <span class="module-title">Kubernetes (25 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">CONCEPTUAL</div>
+        <div class="iq-q">What is the difference between liveness, readiness, and startup probes?</div>
+        <div class="iq-a"><strong>Liveness probe:</strong> "Is this container alive?" If it fails, K8s restarts the container. Use for: detecting deadlocks, infinite loops, corrupted state that won't auto-recover. Don't make it too aggressive — false positives cause restart loops. <strong>Readiness probe:</strong> "Is this container ready to receive traffic?" If it fails, K8s removes pod from Service endpoints. Use for: slow startup, temporary inability to serve (DB disconnected, cache warming). This is how you achieve zero-downtime deployments. <strong>Startup probe:</strong> "Has the app started yet?" Disables liveness/readiness during startup period. Critical for slow-starting apps like Odoo (can take 30–60 seconds). Without it, liveness kills the container before it finishes starting. <strong>For Odoo:</strong> Startup probe: HTTP /web/health with failureThreshold=30 (allows 5 min startup). Readiness: same endpoint. Liveness: same endpoint but less frequent.</div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">ADVANCED</div>
+        <div class="iq-q">How does Kubernetes handle node failure, and what do you need to configure for true HA?</div>
+        <div class="iq-a"><strong>What K8s does automatically:</strong> Node Controller detects unreachable node after ~5 minutes. Taints node with NoSchedule. Evicts pods. Reschedules on healthy nodes. <strong>What you must configure for true HA:</strong> 1) Minimum 3 nodes (1 can fail, quorum maintained). 2) Pod anti-affinity rules so replicas don't land on same node. 3) PodDisruptionBudget: ensure at least 1 pod always running during voluntary disruptions. 4) Multiple replicas per Deployment (not 1). 5) Resource requests set on all pods (required for scheduler to make placement decisions). 6) ReadinessProbes so unhealthy pods don't receive traffic. 7) Stateful components (PostgreSQL) need their own HA solution — don't rely on K8s to solve database HA. Use Azure Database for PostgreSQL Flexible Server with ZoneRedundant mode.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-4</span>
+      <span class="module-title">Terraform & IaC (20 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">PRACTICAL</div>
+        <div class="iq-q">Someone manually changed a resource in Azure that was created by Terraform. How do you detect and handle this?</div>
+        <div class="iq-a"><strong>Detection:</strong> <code>terraform plan</code> shows drift between desired state (in code) and real state (in Azure). The plan will show changes Terraform wants to make to bring resource back in line. <strong>Options:</strong> 1) Revert drift: run <code>terraform apply</code> — Terraform overwrites the manual change. 2) Accept drift: update Terraform code to match the manual change, then apply. 3) Investigate first: was the manual change intentional (emergency fix) or accidental? <strong>Prevention:</strong> Run <code>terraform plan</code> on a schedule in CI (e.g., nightly) and alert on drift. Use Azure Policy to deny changes outside Terraform. Implement strict RBAC: only the CI pipeline's service principal has write access. Document "break glass" procedure for emergency manual changes, with mandatory ticket. <strong>Key insight:</strong> Drift is a process problem, not just a tooling problem. Establish culture of "infrastructure changes go through code."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-5</span>
+      <span class="module-title">Observability & SRE (20 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">DESIGN</div>
+        <div class="iq-q">Design a monitoring strategy for a multi-tenant ERP system. What metrics, logs, and alerts would you set up?</div>
+        <div class="iq-a"><strong>Metrics (Prometheus):</strong> Per-tenant request rate, error rate, latency (p50, p95, p99). DB connections per tenant. Background job queue depth per company. Filestore size per tenant. Active users per company. <strong>Logs (Loki/ELK):</strong> Structured JSON logs with tenant_id field. All auth events (login, logout, failed). DB queries > 1 second. All errors with stack traces. Background job start/completion with duration. <strong>Alerts:</strong> CRITICAL: error rate > 5% for any tenant for 5 min. HIGH: p99 latency > 3s for 10 min. HIGH: DB connections > 90% max for 5 min. MEDIUM: Disk usage > 80%. MEDIUM: Background job failure rate > 1%. INFO: Failed login attempts > 10 from single IP. <strong>Architecture note:</strong> Use Grafana tenant variable — one dashboard that filters by company. Each alert includes tenant_id so you know which client to contact.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">CAT-6</span>
+      <span class="module-title">Behavioral & Scenario Questions (30 Questions)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="interview-q">
+        <div class="iq-label">BEHAVIORAL</div>
+        <div class="iq-q">Tell me about a time you improved deployment reliability. What did you change and what was the outcome?</div>
+        <div class="iq-a"><strong>Your answer template (STAR format):</strong> "At Neomoment, we were deploying Odoo updates for a Saudi client manually — copying files to server, restarting service, often during business hours. Deployments took 2+ hours and had a ~30% failure rate requiring rollback. I designed and implemented a containerized deployment pipeline using Docker + GitHub Actions. The process: developer pushes code → CI runs automated tests → builds Docker image → deploys to staging → manual approval → deploys to production with zero-downtime rolling restart. Result: Deployment time reduced from 2 hours to 12 minutes. No deployment-caused incidents in the following 6 months. Client could now get bug fixes deployed same-day instead of next week." Customize with your real numbers from your projects.</div>
+      </div>
+      <div class="interview-q">
+        <div class="iq-label">SCENARIO</div>
+        <div class="iq-q">Your team wants to adopt Kubernetes but leadership is skeptical about the complexity. How do you make the case?</div>
+        <div class="iq-a"><strong>Business framing (not tech arguments):</strong> 1) Cost: "K8s autoscaling reduces idle server costs by 40-60% compared to always-on VMs." 2) Reliability: "Self-healing pods reduced MTTR from hours to minutes — no manual restarts at 2 AM." 3) Speed: "Deployment time reduced from 45 minutes to 8 minutes. Teams ship features faster." 4) Risk: "Rolling deployments and instant rollback reduced deployment risk — no more all-or-nothing releases." <strong>Handle the complexity concern honestly:</strong> "K8s does add operational complexity. The right answer isn't always K8s. For our FastAPI microservice with variable traffic — K8s saves money and improves reliability. For Odoo ERP — we keep it on a dedicated VM. We apply K8s where it adds value, not everywhere." This maturity wins more credibility than overselling.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== CAREER ============================== -->
+<div class="section" id="section-career">
+  <div class="phase-header">
+    <div class="phase-meta">
+      <div class="phase-tag" style="background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.2);">CAREER TRANSITION STRATEGY</div>
+      <div class="phase-title">Honest Path: DevOps Competency → Architect Title</div>
+      <div class="phase-desc">This is the most important section. Learning DevOps is the easy part. Transitioning your career with it is where most people fail. Read this before you start Month 1.</div>
+    </div>
+  </div>
+
+  <div class="mentor-callout">
+    <div class="mc-label">Brutal Honest Assessment</div>
+    <p>You have 7+ years as an ERP developer and technical consultant with IoT, AI, and cloud exposure. If you complete this syllabus and build all 8 projects, you will have more hands-on DevOps depth than most people with "DevOps Engineer" on their LinkedIn. But here's the reality: adding DevOps skills to your profile without changing how you're positioned will just make you a more expensive developer. The transition requires deliberate repositioning strategy, not just skill acquisition.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header open" onclick="toggleModule(this)">
+      <span class="module-num">S1</span>
+      <span class="module-title">The Right Target Title (Critical Decision)</span>
+      <span class="chevron open">▶</span>
+    </div>
+    <div class="module-body open">
+      <table class="data-table">
+        <thead><tr><th>Title</th><th>Salary (GCC avg)</th><th>Your Fit After 6 Months</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>DevOps Engineer</td><td>SAR 80K–150K/yr</td><td>High — you'll have the skills</td><td style="color:var(--warn)">Don't target this. Too low for your experience.</td></tr>
+          <tr><td>Senior DevOps Engineer</td><td>SAR 150K–220K/yr</td><td>Possible at month 6+</td><td style="color:var(--warn)">Better, but doesn't leverage your ERP/business expertise</td></tr>
+          <tr><td>Platform Engineer</td><td>SAR 180K–280K/yr</td><td>Yes — with K8s + IaC</td><td style="color:var(--success)">Good fit. Modern title, architect-adjacent.</td></tr>
+          <tr><td>Cloud DevOps Architect</td><td>SAR 280K–450K/yr</td><td>At 12–18 months, not 6</td><td style="color:var(--accent)">Best target. Requires real architecture stories.</td></tr>
+          <tr><td>Solution Architect (Cloud)</td><td>SAR 350K–550K/yr</td><td>At 18–24 months</td><td style="color:var(--accent)">Ultimate goal. DevOps is one layer of this role.</td></tr>
+        </tbody>
+      </table>
+      <div class="mentor-callout">
+        <div class="mc-label">Recommendation</div>
+        <p>Target "Platform Engineer" or "DevOps Platform Architect" at 6 months. Position your Odoo ERP containerization work as "enterprise platform engineering for ERP systems" — this is a genuine differentiator. Most DevOps engineers containerize Node.js microservices. You're containerizing multi-instance ERP systems with complex stateful data — that's harder and more valuable.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">S2</span>
+      <span class="module-title">LinkedIn & CV Repositioning (Do This in Month 1)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="topic-grid">
+        <div class="topic-block">
+          <h4>Before (Current)</h4>
+          <ul>
+            <li>Headline: "ERP Consultant | Odoo Developer"</li>
+            <li>Summary mentions Odoo, Flutter, custom modules</li>
+            <li>Experience lists implementation projects</li>
+            <li>Skills: Python, Odoo, Flutter, PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="topic-block">
+          <h4>After (Target)</h4>
+          <ul>
+            <li>Headline: "Platform Engineer | DevOps | ERP + Cloud Architecture | Azure"</li>
+            <li>Summary leads with infrastructure, automation, reliability</li>
+            <li>Experience highlights architecture decisions and outcomes</li>
+            <li>Skills: Docker, K8s, Terraform, Azure, CI/CD, Python, Odoo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="use-case-tag">LinkedIn About Section — Write This</div>
+        <h4>Sample Template</h4>
+        <p>"Platform & DevOps Engineer with 7+ years building and operating enterprise software systems. I specialize in designing cloud-native infrastructure for ERP and API platforms — combining deep application knowledge (Odoo, FastAPI, Next.js) with DevOps practices (Docker, Kubernetes, Terraform, CI/CD) to build systems that are reliable, observable, and fast to deploy. I've architected and operated multi-application stacks across 5 countries for clients in retail, logistics, and manufacturing. Currently focusing on Azure platform engineering and GitOps-based deployment automation."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">S3</span>
+      <span class="module-title">Certifications to Target (Priority Order)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <table class="data-table">
+        <thead><tr><th>Cert</th><th>When</th><th>Why It Matters</th><th>Difficulty</th></tr></thead>
+        <tbody>
+          <tr><td>Docker Certified Associate (DCA)</td><td>End of Month 2</td><td>Validates containerization skills. Shows up in recruiter filters.</td><td>Medium</td></tr>
+          <tr><td>AZ-104 Azure Administrator</td><td>Month 4</td><td>Prerequisite for AZ-305. Azure cloud fundamentals.</td><td>Medium-Hard</td></tr>
+          <tr><td>Terraform Associate (HashiCorp)</td><td>Month 4</td><td>Most asked IaC cert. Validates Terraform knowledge.</td><td>Medium</td></tr>
+          <tr><td>CKA (Certified Kubernetes Administrator)</td><td>Month 5-6</td><td>Industry gold standard for K8s. Opens senior DevOps doors.</td><td>Hard</td></tr>
+          <tr><td>AZ-305 Azure Solutions Architect</td><td>Month 8-9</td><td>The architect-tier cert. Unlocks SAR 300K+ roles in GCC.</td><td>Very Hard</td></tr>
+        </tbody>
+      </table>
+      <div class="mentor-callout">
+        <div class="mc-label">Cert Strategy Warning</div>
+        <p>Do not pursue certifications until you have built the corresponding projects. A paper CKA without real K8s production experience is visible to every interviewer who asks you to debug a CrashLoopBackOff live. The sequence is: build projects → study → pass cert. Not: pass cert → then build. The projects in this syllabus are designed to come before the certs.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">S4</span>
+      <span class="module-title">Market Salaries — What to Expect Honestly</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <div class="salary-grid">
+        <div class="salary-card">
+          <div class="sc-region">Saudi Arabia</div>
+          <div class="sc-val c-accent">SAR 180–300K</div>
+          <div class="sc-note">Platform Eng. / Sr. DevOps. At 12 months with AZ-104 + CKA.</div>
+        </div>
+        <div class="salary-card">
+          <div class="sc-region">UAE</div>
+          <div class="sc-val c-blue">AED 120–200K</div>
+          <div class="sc-note">DevOps/Platform Engineer. Slightly lower than KSA for this role.</div>
+        </div>
+        <div class="salary-card">
+          <div class="sc-region">Netherlands</div>
+          <div class="sc-val c-orange">EUR 65–95K</div>
+          <div class="sc-note">Platform Engineer. Your Capital Equipment connection is the door.</div>
+        </div>
+        <div class="salary-card">
+          <div class="sc-region">Remote (Global)</div>
+          <div class="sc-val c-purple">USD 60–100K</div>
+          <div class="sc-note">Freelance DevOps consulting. $75–120/hr as Platform Architect.</div>
+        </div>
+        <div class="salary-card">
+          <div class="sc-region">Pakistan (remote)</div>
+          <div class="sc-val c-yellow">USD 30–55K</div>
+          <div class="sc-note">Remote DevOps for foreign clients. Reasonable with right client.</div>
+        </div>
+        <div class="salary-card">
+          <div class="sc-region">Freelance (Upwork)</div>
+          <div class="sc-val c-accent">$50–90/hr</div>
+          <div class="sc-note">DevOps + Odoo expertise combined is rare. Premium rates possible.</div>
+        </div>
+      </div>
+      <div class="mentor-callout">
+        <div class="mc-label">Freelance Strategy — Your Hidden Advantage</div>
+        <p>Your unique combination of Odoo DevOps expertise is rare on the freelance market. There are hundreds of DevOps engineers and hundreds of Odoo consultants. DevOps engineers who can containerize and operate Odoo are rare. Consider Upwork / Toptal specifically targeting "Odoo Infrastructure" or "Odoo DevOps" as a bridge income source while building toward the architect role. At $70–90/hr for 20hrs/week, this is USD 5,000–7,000/month remotely.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-header" onclick="toggleModule(this)">
+      <span class="module-num">S5</span>
+      <span class="module-title">Month-by-Month Career Actions (Parallel to Learning)</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="module-body">
+      <table class="data-table">
+        <thead><tr><th>Month</th><th>Technical Goal</th><th>Career Action (Must Do)</th></tr></thead>
+        <tbody>
+          <tr><td>Month 1</td><td>Linux + Git mastery, Odoo server setup</td><td>Update LinkedIn headline. Start public GitHub profile. Write first technical LinkedIn post about Odoo server setup.</td></tr>
+          <tr><td>Month 2</td><td>Full Docker stack deployed</td><td>Push Project 01 to GitHub with detailed README. Post about it. Apply for Docker Certified Associate.</td></tr>
+          <tr><td>Month 3</td><td>CI/CD pipeline live</td><td>Write LinkedIn article: "How I built a CI/CD pipeline for Odoo." This will attract recruiters. Start AZ-104 study.</td></tr>
+          <tr><td>Month 4</td><td>Terraform + Azure stack</td><td>Pass AZ-104. Pass Terraform Associate. Update CV with both certs. Start applying to "Platform Engineer" roles (to calibrate, not necessarily to take).</td></tr>
+          <tr><td>Month 5</td><td>Kubernetes deployed on AKS</td><td>Start CKA preparation. Contribute to an open-source DevOps project (even small). Add K8s to LinkedIn skills.</td></tr>
+          <tr><td>Month 6</td><td>Full observability stack + capstone</td><td>Pass CKA. Write capstone case study as a detailed blog post. Start targeting Platform Architect roles. First round of real interviews.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function show(section) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  
+  const el = document.getElementById('section-' + section);
+  if (el) el.classList.add('active');
+  
+  const navItem = [...document.querySelectorAll('.sidebar-item')].find(
+    el => el.getAttribute('onclick') === `show('${section}')`
+  );
+  if (navItem) {
+    navItem.classList.add('active');
+    document.getElementById('ctb-title').textContent = navItem.getAttribute('data-label') || section;
+  }
+  
+  document.getElementById('content').scrollTop = 0;
+}
+
+function toggleModule(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  
+  if (isOpen) {
+    body.classList.remove('open');
+    header.classList.remove('open');
+    chevron.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    header.classList.add('open');
+    chevron.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>
